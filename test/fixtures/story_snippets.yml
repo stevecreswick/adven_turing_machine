@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  message: MyString
+  telling: one
+  plot_device: one
+
+two:
+  title: MyString
+  message: MyString
+  telling: two
+  plot_device: two
