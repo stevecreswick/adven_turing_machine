@@ -8,22 +8,22 @@
 
 
 author = User.create(
-  username: 'Shakespeare',
-  biography: 'Stratford on Avon represent!'
+  username: 'Mark Im gonna make it Twain',
+  biography: 'All white eerthang'
 )
 
 story_one = author.stories.create(
-  title: "Julius Sees Her",
-  description: "Brutus is a snitch."
+  title: "Monsters in my Head",
+  description: "To be Frank, I am steined."
 )
 
-telling_one = story_one.tellings.create(
+telling_one = story_one.tellings.create(  
   title: "Default",
   description: "Original Story Sequence."
 )
 
 snippet_one = telling_one.story_snippets.create(
-  title: 'Romeo Enters',
+  title: 'Medusa Enters',
   message: 'Rome e yo way over here Romeo'
 )
 

@@ -1,7 +1,29 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  require 'sidekiq/web'
+
+  mount Sidekiq::Web => '/sidekiq'
 
   get '/' => 'users#index'
 
-  resources :users
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
+
+  get '/username/:username' => 'users#username'
+
+  # get '/stories' => 'stories#index'
+
+  get '/thingtodo' => 'stories#thingtodo'
+  # resources :users, :path_prefix => ':authentication_token/users/:story_id'  do
+  #   resources :stories
+  # end
+  resources :stories, defaults: { format: :json }
+
+  # resources :users, defaults: { format: :json } do
+  #   resources :stories
+  # end
 end
