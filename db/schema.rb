@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161119203840) do
+ActiveRecord::Schema.define(version: 20170225182000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,9 +50,23 @@ ActiveRecord::Schema.define(version: 20161119203840) do
     t.string   "title"
     t.string   "description"
     t.integer  "story_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "story_meter"
+    t.integer  "game_over_snippet_id"
     t.index ["story_id"], name: "index_tellings_on_story_id", using: :btree
+  end
+
+  create_table "user_inputs", force: :cascade do |t|
+    t.string  "skill_check"
+    t.integer "check_value"
+    t.integer "story_meter_effect"
+    t.integer "success_snippet_id"
+    t.integer "failure_snippet_id"
+    t.string  "name"
+    t.string  "message"
+    t.integer "story_snippet_id"
+    t.index ["story_snippet_id"], name: "index_user_inputs_on_story_snippet_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,4 +84,5 @@ ActiveRecord::Schema.define(version: 20161119203840) do
   add_foreign_key "story_snippets", "plot_devices"
   add_foreign_key "story_snippets", "tellings"
   add_foreign_key "tellings", "stories"
+  add_foreign_key "user_inputs", "story_snippets"
 end
