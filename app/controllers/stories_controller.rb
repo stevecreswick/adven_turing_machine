@@ -16,6 +16,22 @@ class StoriesController < ApplicationController
     # end
   end
 
+  def create
+    user = User.find( story_params[ 'user_id' ] )
+
+    if user
+      story = user.stories.new( story_params )
+      if story.save
+        render json: story
+      else
+        render :json => { error: 'story not saved' }, :status => 422
+      end
+    else
+      render :json => { error: 'could not find user' }, :status => 422
+    end
+
+  end
+
   def show
     @story = Story.find( story_params[ :id ])
   end
