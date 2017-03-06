@@ -10,79 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170225182000) do
+ActiveRecord::Schema.define(version: 20170304195419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "plot_devices", force: :cascade do |t|
     t.string   "title"
+    t.text     "message"
     t.string   "type_name"
-    t.string   "message"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_plot_devices_on_user_id", using: :btree
+    t.integer  "parent_device_id"
+    t.integer  "story_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["story_id"], name: "index_plot_devices_on_story_id", using: :btree
   end
 
   create_table "stories", force: :cascade do |t|
-    t.string   "title"
-    t.string   "description"
+    t.string   "title",       null: false
+    t.text     "description"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["user_id"], name: "index_stories_on_user_id", using: :btree
   end
 
-  create_table "story_snippets", force: :cascade do |t|
+  create_table "user_inputs", force: :cascade do |t|
     t.string   "title"
     t.string   "message"
-    t.integer  "telling_id"
+    t.string   "stat_check"
+    t.integer  "pass_value"
+    t.string   "success_message"
+    t.integer  "success_id"
+    t.string   "failure_message"
+    t.integer  "failure_id"
     t.integer  "plot_device_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.integer  "parent_snippet_id"
-    t.index ["plot_device_id"], name: "index_story_snippets_on_plot_device_id", using: :btree
-    t.index ["telling_id"], name: "index_story_snippets_on_telling_id", using: :btree
-  end
-
-  create_table "tellings", force: :cascade do |t|
-    t.string   "title"
-    t.string   "description"
-    t.integer  "story_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.integer  "story_meter"
-    t.integer  "game_over_snippet_id"
-    t.index ["story_id"], name: "index_tellings_on_story_id", using: :btree
-  end
-
-  create_table "user_inputs", force: :cascade do |t|
-    t.string  "skill_check"
-    t.integer "check_value"
-    t.integer "story_meter_effect"
-    t.integer "success_snippet_id"
-    t.integer "failure_snippet_id"
-    t.string  "name"
-    t.string  "message"
-    t.integer "story_snippet_id"
-    t.index ["story_snippet_id"], name: "index_user_inputs_on_story_snippet_id", using: :btree
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["plot_device_id"], name: "index_user_inputs_on_plot_device_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username"
-    t.string   "biography"
+    t.string   "username",        null: false
+    t.string   "password_digest", null: false
+    t.string   "email",           null: false
+    t.string   "auth_token"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.string   "password_digest"
-    t.string   "email"
-    t.string   "auth_token"
   end
 
-  add_foreign_key "plot_devices", "users"
+  add_foreign_key "plot_devices", "stories"
   add_foreign_key "stories", "users"
-  add_foreign_key "story_snippets", "plot_devices"
-  add_foreign_key "story_snippets", "tellings"
-  add_foreign_key "tellings", "stories"
-  add_foreign_key "user_inputs", "story_snippets"
+  add_foreign_key "user_inputs", "plot_devices"
 end

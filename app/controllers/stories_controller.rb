@@ -21,7 +21,13 @@ class StoriesController < ApplicationController
 
     if user
       story = user.stories.new( story_params )
+
       if story.save
+      #   story.tellings.new(
+      #     title: "Default",
+      #     story_meter: 10
+      #   )
+
         render json: story
       else
         render :json => { error: 'story not saved' }, :status => 422
@@ -33,11 +39,11 @@ class StoriesController < ApplicationController
   end
 
   def show
-    @story = Story.find( story_params[ :id ])
+    @story = Story.find( story_params[ :id ] )
   end
 
   def authenticate
-    authenticate_or_request_with_http_token do |token, options|
+    authenticate_or_request_with_http_token do | token, options |
       User.find_by_auth_token( token )
     end
   end

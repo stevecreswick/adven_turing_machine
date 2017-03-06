@@ -15,3 +15,15 @@ class ApplicationController < ActionController::Base
   #   User.find_by_auth_token( auth_token )
   # end
 end
+
+
+# Remove tellings
+# Remove all tellings related models/controllers/views
+
+# Remove story_snippets
+# Remove story_snippets stuffs
+
+# Add parent_device_id to plot_device
+
+# Add story meter to story
+# Add game over snippet id

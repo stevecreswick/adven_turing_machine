@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'plot_devices/index'
+
+  get 'plot_devices/create'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   require 'sidekiq/web'
 
@@ -22,6 +26,7 @@ Rails.application.routes.draw do
   #   resources :stories
   # end
   resources :stories, defaults: { format: :json }
+  resources :plot_devices, defaults: { format: :json }
 
   # resources :users, defaults: { format: :json } do
   #   resources :stories
