@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :user_inputs, defaults: { format: :json }
 
   put '/plot_devices' => 'plot_devices#update'
+  put '/user_inputs' => 'user_inputs#update'
 
   # resources :users, defaults: { format: :json } do
   #   resources :stories
