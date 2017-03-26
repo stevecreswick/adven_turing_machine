@@ -1,5 +1,6 @@
 class PlotDevice < ApplicationRecord
   belongs_to :story
+  has_many :user_inputs
 
   has_many :child_devices,
             class_name: "PlotDevice",

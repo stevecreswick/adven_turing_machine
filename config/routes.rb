@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   # end
   resources :stories, defaults: { format: :json }
   resources :plot_devices, defaults: { format: :json }
+  resources :user_inputs, defaults: { format: :json }
+
+  put '/plot_devices' => 'plot_devices#update'
 
   # resources :users, defaults: { format: :json } do
   #   resources :stories

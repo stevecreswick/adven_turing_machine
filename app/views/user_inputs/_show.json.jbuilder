@@ -1,0 +1,13 @@
+json.extract! user_input,
+  :id,
+  :title,
+  :message,
+  :stat_check,
+  :pass_value,
+  :success_message,
+  :success_id,
+  :failure_message,
+  :failure_id,
+  :plot_device_id,
+  :created_at,
+  :updated_at
