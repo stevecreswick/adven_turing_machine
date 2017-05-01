@@ -9,7 +9,8 @@ class UsersController < ApplicationController
 
   def username
     @user = User.find_by_username( params[ :username ] )
-    render json: @user
+    puts @user.username
+    render "users/show"
   end
   # GET /users/1
   # GET /users/1.json
@@ -81,13 +82,17 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       # params.fetch(:user, {})
-      params.require( :user ).
+      params.
         permit(
           :username,
           :email,
           :password,
           :password_confirmation,
-          :auth_token
+          :auth_token,
+          :location,
+          :about,
+          :profile_quote,
+          :image_url
         )
     end
 end

@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
 
+  # get '/authors' => 'users#index'
   get '/username/:username' => 'users#username'
+  get '/users/:username' => 'users#username', defaults: { format: :json }
 
   # get '/stories' => 'stories#index'
 
@@ -25,12 +27,15 @@ Rails.application.routes.draw do
   # resources :users, :path_prefix => ':authentication_token/users/:story_id'  do
   #   resources :stories
   # end
+
+  resources :users, defaults: { format: :json }
   resources :stories, defaults: { format: :json }
   resources :plot_devices, defaults: { format: :json }
   resources :user_inputs, defaults: { format: :json }
 
   put '/plot_devices' => 'plot_devices#update'
   put '/user_inputs' => 'user_inputs#update'
+  put 'users' => 'users#update'
 
   # resources :users, defaults: { format: :json } do
   #   resources :stories
