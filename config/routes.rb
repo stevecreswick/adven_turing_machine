@@ -1,4 +1,22 @@
 Rails.application.routes.draw do
+  # get 'likes/index'
+  #
+  # get 'likes/create'
+  #
+  # get 'likes/update'
+  #
+  # get 'likes/show'
+  #
+  # get 'likes/destroy'
+
+  get 'index/create'
+
+  get 'index/update'
+
+  get 'index/show'
+
+  get 'index/destroy'
+
   get 'plot_devices/index'
 
   get 'plot_devices/create'
@@ -36,6 +54,12 @@ Rails.application.routes.draw do
   put '/plot_devices' => 'plot_devices#update'
   put '/user_inputs' => 'user_inputs#update'
   put 'users' => 'users#update'
+
+  # get '/post/:id/likes' => 'likes#index'
+  post '/stories/:story_id/likes' => 'likes#create'
+  put '/stories/:story_id/likes' => 'likes#update'
+
+
 
   # resources :users, defaults: { format: :json } do
   #   resources :stories

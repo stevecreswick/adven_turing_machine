@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :stories
+  has_many :likes
 
   validates_uniqueness_of :username
   validates_uniqueness_of :email
@@ -8,10 +9,18 @@ class User < ApplicationRecord
   has_secure_password
   before_create :set_auth_token
 
+
+
   # username
   # password
   # email
   # auth_token
+
+  # quote
+  # location
+  # about
+  # followed authors
+  # following authors
 
   private
 
