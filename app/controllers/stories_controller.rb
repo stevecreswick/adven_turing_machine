@@ -11,6 +11,7 @@ class StoriesController < ApplicationController
     # if authenticate( story_params[ :auth_token ] )
       # user = User.find( story_params[ :user_id ] )
       @stories = Story.all
+
     # else
     #   render :status => 404
     # end
@@ -39,7 +40,19 @@ class StoriesController < ApplicationController
   end
 
   def show
-    @story = Story.find( story_params[ :id ] )
+    auth_token = params[:auth_token]
+
+    if auth_token
+      user = User.find_by_auth_token( auth_token )
+
+      if user
+        @story = Story.find( story_params[ :id ] )
+      else
+        render :json => { error: 'could not find user' }, :status => 422
+      end
+    else
+      render :json => { error: 'no auth token present' }, :status => 422
+    end
   end
 
   def authenticate
