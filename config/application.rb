@@ -11,9 +11,16 @@ module AdvenTuringMachine
 
     config.action_dispatch.default_headers = {
       'Access-Control-Allow-Origin' => 'http://localhost:8080',
-      'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(","),
+      'Access-Control-Request-Method' => %w{GET POST OPTIONS HEAD}.join(","),
       'Access-Control-Allow-Headers' => 'Content-Type'
     }
+
+    # config.middleware.insert_before 0, Rack::Cors do
+    #   allow do
+    #     origins '*'
+    #     resource '*', :headers => :any, :methods => [:get, :post, :options]
+    #   end
+    # end
 
     # Access-Control-Allow-Headers: Content-Type
     # Access-Control-Allow-Methods: GET, POST, OPTIONS
