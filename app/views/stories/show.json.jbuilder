@@ -1,6 +1,7 @@
   json.title @story.title
   json.description @story.description
   json.id @story.id
+  json.author @story.user
   json.like_count @story.likes.length
   # json.user_like @story.likes.where( { user_id: current_user.id } ) ? @story.likes.where( { user_id: current_user.id } ).first : {}
 

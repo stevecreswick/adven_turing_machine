@@ -1,1 +1,1 @@
-json.partial! "likes/like", like: @like
+json.partial! "users/user", user: @user
